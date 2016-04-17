@@ -19,7 +19,7 @@ public class CouponService {
 		couponA.setCouponName("알뜰 PC 할인 쿠폰");
 		couponA.setCouponType("DEAL");  //CART
 		couponA.setDiscountType("AMOUNT"); // DISCOUNTType{RATE, AMOUNT}  //적율/정액
-		couponA.setTargetDeal("H");
+		couponA.setTargetDeal("L");
 		couponA.setCouponCount(0);
 		couponA.setDiscountAmount(50000);
 		couponList.add(couponA);
@@ -29,7 +29,7 @@ public class CouponService {
 		couponB.setCouponName("알뜰 PC 할인 쿠폰2");
 		couponB.setCouponType("DEAL");  //CART
 		couponB.setDiscountType("AMOUNT"); // DISCOUNTType{RATE, AMOUNT}  //적율/정액
-		couponB.setTargetDeal("H");
+		couponB.setTargetDeal("L");
 		couponB.setTargetCountMax(10);
 		couponB.setTargetCountMin(5);
 		couponB.setDiscountAmount(40000);
@@ -52,7 +52,7 @@ public class CouponService {
 		couponD.setCouponName("선착순 할인 쿠폰");
 		couponD.setCouponType("CART");  //CART
 		couponD.setDiscountType("RATE"); // DISCOUNTType{RATE, AMOUNT}  //적율/정액
-		couponD.setTargetDeal("C3");
+		couponD.setTargetDeal("ALL");
 		couponD.setRate(20);
 		couponD.setCouponCount(10);
 		couponList.add(couponD);
@@ -101,27 +101,27 @@ public class CouponService {
 	public Cart dealCouponValid(Order order, List<Coupon> couponList) {
 		Cart cart = new Cart();
 		List<OrderDeal> orderDealList = order.getOrderDealList();
+		Boolean result = false;
 
 		for(OrderDeal orderDeal : orderDealList) {
 			for(Coupon coupon : couponList) {
-				if(orderDeal.getDealCouponCode().equals(coupon.getCode())) {
-					//target 딜 검증
-					if(orderDeal.getDealCode().equals(coupon.getTargetDeal())) {
-						if(coupon.getTargetCountMin() <= orderDeal.getDealCount() && orderDeal.getDealCount() >= coupon.getTargetCountMax()) {
-							orderDeal.setDealDiscountAmount(coupon.getDiscountAmount());
+				System.out.println(" 딜 코드들 : " + orderDeal.getDealCouponCode()+coupon.getCode()+ orderDeal.getDealCode()+coupon.getTargetDeal());
+				if(orderDeal.getDealCouponCode().equals(coupon.getCode()) && orderDeal.getDealCode().equals(coupon.getTargetDeal())) {
+					System.out.println("====2 " + orderDeal.getDealDiscountAmount());
+					if(coupon.getTargetCountMin() <= orderDeal.getDealCount() && orderDeal.getDealCount() >= coupon.getTargetCountMax()) {
 
-							orderDealList.add(orderDeal);
-							cart.setCouponResult(true);
-							order.setOrderDealList(orderDealList);
-							cart.setOrder(order);
-							System.out.println("====딜쿠폰 : " );
-						}
+						orderDeal.setDealDiscountAmount(coupon.getDiscountAmount());
+
+						result = true;
+
+						System.out.println("====딜쿠폰 : " );
 					}
-				} else {
-					cart.setOrder(order);
 				}
 			}
 		}
+		cart.setCouponResult(result);
+		order.setOrderDealList(orderDealList);
+		cart.setOrder(order);
 		return cart;
 	}
 }
