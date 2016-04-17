@@ -1,5 +1,10 @@
 package main;
 
+import order.model.Order;
+import order.model.OrderDeal;
+
+import java.util.List;
+
 /**
  * Created by sjshin on 2016-04-13.
  */
@@ -18,7 +23,24 @@ public class Screen {
 		System.out.println(ANSI_YELLOW + message + ANSI_RESET); //
 	}
 
-	public void printMessage2(String message, int id) {
-		System.out.println(ANSI_YELLOW + message +  id + ANSI_RESET); //
+	public void printOrder(Order order) {
+
+		List<OrderDeal> orderDealList = order.getOrderDealList();
+		System.out.println(ANSI_YELLOW
+				+ "장바구니ID: " + order.getCartId()
+				+ "\n사용자 ID : " + order.getUserId()
+				+ "\n장바구니쿠폰코드 : " + order.getCartCouponCode()
+				+ "\n카트할인금액 : " + order.getCartDiscountAmount() + " 원"
+				+ "\n총 주문금액 : " + order.getTotalAmount() + " 원"
+				+ ANSI_RESET
+		);
+		for(OrderDeal orderDeal : orderDealList) {
+			System.out.println(ANSI_YELLOW
+					+ "\n상품코드|수량|상품쿠폰코드 : " + orderDeal.getDealCode()+"|"+orderDeal.getDealCount()+"|"+orderDeal.getDealCouponCode()
+					+ "\n상품금액 : " + orderDeal.getDealAmount() + " 원"
+					+ "\n할인금액 : " + orderDeal.getDealDiscountAmount() + " 원"
+					+ ANSI_RESET);
+		}
+
 	}
 }

@@ -5,7 +5,7 @@ package deal.model;
  */
 public class Deal {
 	String dealCode;  //딜 코드, 가격, 이름, 설명
-	long price;
+	int price;
 	String dealName;
 	String description;
 	int count;
@@ -26,11 +26,11 @@ public class Deal {
 		this.dealCode = dealCode;
 	}
 
-	public long getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
-	public void setPrice(long price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 

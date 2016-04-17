@@ -29,7 +29,7 @@ public class DealService {
 
 		Deal dealL = new Deal();
 		dealL.setDealCode("L");
-		dealL.setPrice(300000);
+		dealL.setPrice(350000);
 		dealL.setDealName("알뜰 PC");
 		dealL.setDescription("최소 구동환경 제공");
 		dealList.add(dealL);

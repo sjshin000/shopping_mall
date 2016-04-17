@@ -12,7 +12,8 @@ public class Coupon {
 	String discountType;
 	String code;
 	String couponName;
-	long discountAmount;
+	int discountAmount;
+	int rate;
 
 	String targetDeal;
 	int targetAmount;
@@ -53,11 +54,11 @@ public class Coupon {
 		this.couponName = couponName;
 	}
 
-	public long getDiscountAmount() {
+	public int getDiscountAmount() {
 		return discountAmount;
 	}
 
-	public void setDiscountAmount(long discountAmount) {
+	public void setDiscountAmount(int discountAmount) {
 		this.discountAmount = discountAmount;
 	}
 
@@ -99,5 +100,13 @@ public class Coupon {
 
 	public void setCouponCount(int couponCount) {
 		this.couponCount = couponCount;
+	}
+
+	public int getRate() {
+		return rate;
+	}
+
+	public void setRate(int rate) {
+		this.rate = rate;
 	}
 }

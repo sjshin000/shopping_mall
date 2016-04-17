@@ -8,14 +8,14 @@
     <![CDATA[
       INSERT INTO `order` (
         cartId
-        , usserId
+        , userId
         , cartCouponCode
         , dealCode
         , dealCount
         , dealCouponCode
       ) VALUES (
         #{cartId}
-        , #{usserId}
+        , #{userId}
         , #{cartCouponCode}
         , #{dealCode}
         , #{dealCount}
